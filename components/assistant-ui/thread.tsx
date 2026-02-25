@@ -26,7 +26,6 @@ import {
 } from "@assistant-ui/react";
 
 import type { FC } from "react";
-import {useRef, useState} from "react";
 import { LazyMotion, MotionConfig, domAnimation } from "motion/react";
 import * as m from "motion/react-m";
 
@@ -113,77 +112,65 @@ const ThreadWelcome: FC = () => {
 };
 
 const suggestions = [
-  { title: "/img", label: "Gjenero një imazh", icon: Image, icon_color: "#3b82f6" },
-  { title: "/tns", label: "Përkthe një fjalë, fjali ose tekst", icon: FileText, icon_color: "#10b981" },
-  { title: "/ppt", label: "Krijo një prezantim", icon: Presentation, icon_color: "#ed3e12" },
-  { title: "Zgjidh ushtrimin:", label: "Zgjidh ushtrime te cdo lende dhe veshtiresie", icon: BookOpen, icon_color: "#a855f7" },
+    {
+        title: "/img",
+        label: "Gjenero një imazh",
+        icon: Image,
+        icon_color: "#3b82f6",
+    },
+    {
+        title: "/tns",
+        label: "Përkthe një fjalë, fjali ose tekst",
+        icon: FileText,
+        icon_color: "#10b981",
+    },
+    {
+        title: "/ppt",
+        label: "Krijo një prezantim",
+        icon: Presentation,
+        icon_color: "#ed3e12",
+    },
+    {
+        title: "Zgjidh ushtrimin:",
+        label: "Zgjidh ushtrime te cdo lende dhe veshtiresie",
+        icon: BookOpen,
+        icon_color: "#a855f7",
+    },
 ];
 
 export const ThreadSuggestions: FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const scroll = (direction: "left" | "right") => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const scrollAmount = container.offsetWidth * 0.8; // scroll 80% of container width
-    const newPos = direction === "left" ? container.scrollLeft - scrollAmount : container.scrollLeft + scrollAmount;
-    container.scrollTo({ left: newPos, behavior: "smooth" });
-    setScrollPosition(newPos);
-  };
-
-  return (
-    <div className="relative w-full">
-      {/* Left Arrow */}
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-200 p-2 shadow hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-      >
-        ◀
-      </button>
-
-      {/* Scrollable Container */}
-      <div
-        ref={containerRef}
-        className="flex gap-3 overflow-x-auto scroll-smooth pb-4 pl-10 pr-10"
-      >
-        {suggestions.map((s, index) => {
-          const Icon = s.icon;
-          return (
-            <m.div
-              key={s.title + index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 * index }}
-              className="min-w-[200px] flex-shrink-0 scroll-m-2"
-            >
-              <ThreadPrimitive.Suggestion prompt={s.title} asChild>
-                <Button
-                  variant="ghost"
-                  className="h-auto w-full flex-col items-start gap-1 rounded-3xl border px-5 py-4 text-left text-sm hover:bg-accent/30 dark:hover:bg-accent/40"
-                  aria-label={s.title}
-                >
-                  <span className="flex items-center gap-2 font-medium">
-                    <Icon size={16} style={{ color: s.icon_color ?? "hsl(var(--muted-foreground))" }} />
-                    {s.title}
-                  </span>
-                  <span className="text-muted-foreground">{s.label}</span>
-                </Button>
-              </ThreadPrimitive.Suggestion>
-            </m.div>
-          );
-        })}
-      </div>
-
-      {/* Right Arrow */}
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-200 p-2 shadow hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-      >
-        ▶
-      </button>
-    </div>
-  );
+    return (
+        <div className="grid w-full gap-2 pb-4 sm:grid-cols-2">
+            {suggestions.map((s, index) => {
+                const Icon = s.icon;
+                return (
+                    <m.div
+                        key={s.title + index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.05 * index }}
+                    >
+                        <ThreadPrimitive.Suggestion prompt={s.title} asChild>
+                            <Button
+                                variant="ghost"
+                                className="h-auto w-full flex-col items-start gap-1 rounded-3xl border px-5 py-4 text-left text-sm hover:bg-accent/30 dark:hover:bg-accent/40"
+                                aria-label={s.title}
+                            >
+                                <span className="flex items-center gap-2 font-medium">
+                                    <Icon
+                                        size={16}
+                                        style={{ color: s.icon_color ?? "hsl(var(--muted-foreground))" }}
+                                    />
+                                    {s.title}
+                                </span>
+                                <span className="text-muted-foreground">{s.label}</span>
+                            </Button>
+                        </ThreadPrimitive.Suggestion>
+                    </m.div>
+                );
+            })}
+        </div>
+    );
 };
 
 const Composer: FC = () => {
