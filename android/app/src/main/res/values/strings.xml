@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">EdBot</string>
+    <string name="title_activity_main">EdBot</string>
+    <string name="package_name">com.edbot.app</string>
+    <string name="custom_url_scheme">com.edbot.app</string>
+</resources>
