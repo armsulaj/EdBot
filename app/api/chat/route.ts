@@ -13,6 +13,7 @@ Nëse dikush kërkon:
 - "/img": Gjenero një imazh.
 - "/ppt": Krijo një prezantim.
 - "/tns": Përkthe tekstin.
+- "/pdf": Gjenero një PDF.
 
 Për çdo gjë tjetër, thjesht ndihmo përdoruesin.`;
 
@@ -47,6 +48,36 @@ async function generateImageFn(prompt: string) {
         success: true,
         imageUrl: data.data?.[0]?.url as string,
         revisedPrompt: data.data?.[0]?.revised_prompt as string,
+    };
+}
+
+async function createDocumentFn(prompt: string) {
+    const apiKey = process.env.SLIDESGPT_API_KEY;
+    if (!apiKey) {
+        return { success: false, error: "Missing API Key" };
+    }
+
+    const response = await fetch(
+        "https://api.slidesgpt.com/v1/presentations/generate",
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${apiKey}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ prompt }),
+        },
+    );
+
+    if (!response.ok) {
+        return { success: false, error: "SlidesGPT Error" };
+    }
+
+    const data = await response.json();
+    return {
+        success: true,
+        downloadUrl: data.download as string,
+        embedUrl: data.embed as string,
     };
 }
 
@@ -101,6 +132,13 @@ export async function POST(req: Request) {
                     prompt: z.string().describe("Tema e prezantimit"),
                 }),
                 execute: async ({ prompt }) => createPresentationFn(prompt),
+            }),
+            createDocument: tool({
+                description: "Krijo një dokument",
+                inputSchema: z.object({
+                    prompt: z.string().describe("Tema e dokumentit"),
+                }),
+                execute: async ({ prompt }) => createDocumentFn(prompt),
             }),
         },
     });

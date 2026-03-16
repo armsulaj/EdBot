@@ -227,7 +227,7 @@ export function ThreadListSidebar({
                                 <Link href="/">
                                     <div className="flex items-center gap-2">
                                         <img
-                                            src="https://raw.githubusercontent.com/redissh/EdBot/main/logo.png"
+                                            src="https://raw.githubusercontent.com/armsulaj/EdBot/main/logo.png"
                                             alt="EdBot-Logo"
                                             className="h-8 w-8"
                                         />
