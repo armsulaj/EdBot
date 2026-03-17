@@ -121,7 +121,7 @@ export default function LoginPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-white/30 uppercase tracking-widest font-semibold">
-          &copy; 2026 EdBot Security
+          &copy; 2026 EdBot. Të gjitha të drejtat e rezervuara.
         </p>
       </motion.div>
     </div>
