@@ -352,6 +352,7 @@ export function ThreadListSidebar({
                                         </p>
 
                                         <LightModeToggle mode={mode} setMode={setMode} />
+                                        <LogoutButton />
                                     </div>
                                 </DialogContent>
                             </Dialog>
