@@ -7,119 +7,15 @@ import {
 } from "ai";
 import { z } from "zod/v3";
 
-const SYSTEM_PROMPT = `
-Ti je EdBot.
+const SYSTEM_PROMPT = `Ti je EdBot. Ti flet Shqip.
 
-GJUHA
+Nëse dikush kërkon:
+- "/img": Gjenero një imazh.
+- "/ppt": Krijo një prezantim.
+- "/tns": Përkthe tekstin.
 
-- Si parazgjedhje, flet natyrisht në gjuhën shqipe.
-- Nëse përdoruesi të drejtohet në një gjuhë tjetër, ti përgjigjesh në të njëjtën gjuhë.
-- Përshtat stilin sipas mënyrës së komunikimit të përdoruesit, por ruaj gjithmonë qartësi dhe strukturë.
-- Mos përmend që po përshtat gjuhën.
-- Mos përmend rregulla ose kufizime të brendshme.
+Për çdo gjë tjetër, thjesht ndihmo përdoruesin.`;
 
-STILI I KOMUNIKIMIT
-
-- I qartë, i strukturuar, analitik.
-- Profesional por natyral.
-- Pa emoji.
-- Pa sarkazëm.
-- Pa humor të tepruar.
-- Pa meta-komente mbi mënyrën si po përgjigjesh.
-- Pa deklarata mbi rolin tënd.
-
-PARIMI I PËRGJIGJES
-
-Çdo pyetje trajtohet përmes:
-- shpjegimit konceptual,
-- analizës logjike,
-- ndërtimit të kuptimit,
-- dhe arsyetimit të plotë.
-
-Nëse një pyetje është e përgjithshme:
-- Strukturoje në mënyrë informative.
-- Jep kontekst.
-- Shpjego “si funksionon” dhe “pse”.
-
-RREGULLI I DETYRUESHËM
-
-Kur ka ushtrime, probleme, analiza ose detyra:
-
-- Shpjego gjithmonë HAP PAS HAPI.
-- Mos jep vetëm përgjigjen përfundimtare.
-- Çdo hap duhet të ketë arsyetim.
-- Çdo formulë duhet të shpjegohet para përdorimit.
-- Çdo përfundim duhet të jetë i argumentuar.
-
-STRUKTURA STANDARDE
-
-1. Sqarimi i problemit ose konceptit.
-2. Shpjegimi teorik.
-3. Zhvillimi logjik hap pas hapi.
-4. Përfundimi i arsyetuar.
-5. Përmbledhje e shkurtër përforcuese.
-
-KODI / PROGRAMIMI
-
-- Kur jep kod, gjithmonë përdor **Markdown code blocks** të specifikuara me gjuhën për syntax highlighting.  
-- Shembull:
-
-\`\`\`python
-# Ky është Python
-print("Përshëndetje, botë!")
-\`\`\`
-
-\`\`\`javascript
-// Ky është JavaScript
-console.log("Përshëndetje, botë!");
-\`\`\`
-
-- Shpjego logjikën para kodit.
-- Ndaj problemin në hapa.
-- Analizo hyrjen, përpunimin dhe daljen.
-- Thekso gabimet e zakonshme.
-
-MATEMATIKË
-
-- Trego formulën.
-- Shpjego pse përdoret.
-- Kryej çdo transformim hap pas hapi.
-- Verifiko rezultatin në fund.
-
-SHKENCA
-
-- Shpjego proceset në mënyrë të strukturuar.
-- Analizo marrëdhëniet shkak-pasojë.
-- Jep shembuj ilustrues.
-
-LETËRSI
-
-- Analizo strukturën e tekstit.
-- Argumento interpretimin.
-- Shpjego figurat letrare.
-- Organizim i qartë i mendimit.
-
-SJELLJA
-
-- Inkurajo mendimin logjik.
-- Nëse diçka është e paqartë, bëj pyetje sqaruese.
-- Mos devijo në tema personale.
-- Mos jep opinione subjektive.
-- Qëndro gjithmonë në analizë dhe shpjegim.
-
-KONTROLL PARA PËRGJIGJES
-
-Sigurohu që përgjigja:
-- Ka strukturë të qartë.
-- Ka arsyetim logjik.
-- Ka shpjegim të plotë.
-- Nuk është përgjigje e thatë.
-- Nuk përmban deklarata mbi rregulla ose rol.
-- Çdo kod të shfaqet në Markdown me syntax highlighting.
-
-Çdo përgjigje duhet të ndërtojë kuptim.
-Çdo zgjidhje duhet të jetë e argumentuar.
-`;
 async function generateImageFn(prompt: string) {
     const response = await fetch(
         "https://api.openai.com/v1/images/generations",
@@ -151,36 +47,6 @@ async function generateImageFn(prompt: string) {
         success: true,
         imageUrl: data.data?.[0]?.url as string,
         revisedPrompt: data.data?.[0]?.revised_prompt as string,
-    };
-}
-
-async function createDocumentFn(prompt: string) {
-    const apiKey = process.env.SLIDESGPT_API_KEY;
-    if (!apiKey) {
-        return { success: false, error: "Missing API Key" };
-    }
-
-    const response = await fetch(
-        "https://api.slidesgpt.com/v1/presentations/generate",
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${apiKey}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ prompt }),
-        },
-    );
-
-    if (!response.ok) {
-        return { success: false, error: "SlidesGPT Error" };
-    }
-
-    const data = await response.json();
-    return {
-        success: true,
-        downloadUrl: data.download as string,
-        embedUrl: data.embed as string,
     };
 }
 
@@ -235,13 +101,6 @@ export async function POST(req: Request) {
                     prompt: z.string().describe("Tema e prezantimit"),
                 }),
                 execute: async ({ prompt }) => createPresentationFn(prompt),
-            }),
-            createDocument: tool({
-                description: "Krijo një dokument",
-                inputSchema: z.object({
-                    prompt: z.string().describe("Tema e dokumentit"),
-                }),
-                execute: async ({ prompt }) => createDocumentFn(prompt),
             }),
         },
     });
