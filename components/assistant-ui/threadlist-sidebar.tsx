@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { SettingsIcon, Sun, Moon } from "lucide-react";
+import { SettingsIcon, Sun, Moon, Loader2, LogOut } from "lucide-react";
 import Link from "next/link";
 import {
     Sidebar,
@@ -20,6 +20,8 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { ThreadList } from "@/components/assistant-ui/thread-list";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
 
 // Theme System
 
@@ -171,6 +173,72 @@ function LightModeToggle({
     );
 }
 
+// LOGOUT BUTTON WITH CONFIRMATION
+
+function LogoutButton() {
+    const [loading, setLoading] = React.useState(false);
+    const [confirmOpen, setConfirmOpen] = React.useState(false);
+
+    const handleLogout = async () => {
+        setLoading(true);
+        try {
+            await signOut(auth);
+            window.location.href = "/login";
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+        }
+    };
+
+    return (
+        <>
+            <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+                <DialogTrigger asChild>
+                    <SidebarMenuButton
+                        size="lg"
+                        className="group relative flex items-center gap-2"
+                    >
+                        <LogOut className="aui-sidebar-settings-icon size-4 text-red-500 group-hover:text-red-400 transition-colors" />
+                        <div className="aui-sidebar-footer-heading flex flex-col gap-0.5 leading-none">
+                            <span>Shkyçu</span>
+                        </div>
+                    </SidebarMenuButton>
+                </DialogTrigger>
+
+                <DialogContent className="p-4 max-w-sm rounded-xl bg-background border border-border flex flex-col gap-4 items-center text-center">
+                    <DialogTitle className="text-lg font-semibold text-foreground">
+                        Konfirmo Shkyçjen
+                    </DialogTitle>
+                    <p className="text-sm text-muted-foreground">
+                        A jeni të sigurt që dëshironi të dilni nga EdBot?
+                    </p>
+
+                    <div className="flex gap-4 mt-2 w-full">
+                        <button
+                            className="flex-1 rounded-2xl border border-red-500 bg-red-600 py-2 text-white font-bold hover:bg-red-500 active:scale-[0.98] transition-all"
+                            onClick={handleLogout}
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <Loader2 className="h-5 w-5 animate-spin mx-auto" />
+                            ) : (
+                                "Po, Dil"
+                            )}
+                        </button>
+                        <button
+                            className="flex-1 rounded-2xl border border-muted bg-muted py-2 text-foreground font-bold hover:bg-muted/80 active:scale-[0.98] transition-all"
+                            onClick={() => setConfirmOpen(false)}
+                            disabled={loading}
+                        >
+                            Jo, Anulo
+                        </button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+        </>
+    );
+}
+
 // Main Sidebar
 
 export function ThreadListSidebar({
@@ -297,6 +365,11 @@ export function ThreadListSidebar({
                                 </div>
                             </SidebarMenuButton>
                         )}
+                    </SidebarMenuItem>
+
+                    {/* LOGOUT BUTTON */}
+                    <SidebarMenuItem>
+                        <LogoutButton />
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>
