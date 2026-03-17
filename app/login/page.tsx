@@ -80,9 +80,6 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold tracking-tight text-white mb-2">
               EdBot
             </h1>
-            <p className="text-sm text-white/50 mb-4">
-              Ky aplikacion është privat. Hyni me llogarinë tuaj të Google.
-            </p>
           </div>
 
           <button
