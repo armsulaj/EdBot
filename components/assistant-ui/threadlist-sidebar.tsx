@@ -347,7 +347,7 @@ export function ThreadListSidebar({
                                             setIndex={setThemeIndex}
                                         />
 
-                                        <p className="inline-block border-b border-gray-300 pb-1 text-center w-full">
+                                        <p className="inline-block border-b border-gray-300 pb-1 text-center">
                                             Sfondi
                                         </p>
 
