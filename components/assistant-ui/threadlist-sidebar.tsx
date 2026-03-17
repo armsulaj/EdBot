@@ -365,12 +365,12 @@ export function ThreadListSidebar({
                                 </div>
                             </SidebarMenuButton>
                         )}
-                    </SidebarMenuItem>
-
-                    {/* LOGOUT BUTTON */}
-                    <SidebarMenuItem>
+                        {/* LOGOUT BUTTON */}
+                        <SidebarMenuItem>
                         <LogoutButton />
                     </SidebarMenuItem>
+                    </SidebarMenuItem>
+
                 </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
