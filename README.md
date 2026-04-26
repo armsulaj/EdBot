@@ -6,7 +6,7 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-AI%20API-412991?logo=openai\&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployment-black?logo=vercel)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Stars](https://img.shields.io/github/stars/your-username/edbot?style=social)
+![Stars](https://img.shields.io/github/stars/armsulaj/edbot?style=social)
 
 ---
 
