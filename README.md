@@ -3,7 +3,6 @@
 ![Next.js](https://img.shields.io/badge/Next.js-Framework-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-Library-61DAFB?logo=react\&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Language-3178C6?logo=typescript\&logoColor=white)
-![OpenAI](https://img.shields.io/badge/OpenAI-AI%20API-412991?logo=openai\&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployment-black?logo=vercel)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Stars](https://img.shields.io/github/stars/armsulaj/edbot?style=social)
@@ -44,17 +43,6 @@ An AI-powered learning assistant that delivers **clear, structured, and personal
 * 🎨 **Clean UI/UX** — Minimal and intuitive design
 * 🔐 **Secure Data Handling**
 * 🌐 **Scalable Architecture** — Ready for progress tracking, quizzes, analytics
-
----
-
-## 🛠 Tech Stack
-
-* **Frontend:** React, Next.js
-* **Languages:** TypeScript, JavaScript
-* **AI:** OpenAI API
-* **Styling:** CSS
-* **Deployment:** Vercel
-* **Design:** Figma
 
 ---
 
