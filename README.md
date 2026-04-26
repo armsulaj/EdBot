@@ -26,7 +26,7 @@ An AI-powered learning assistant that delivers **clear, structured, and personal
 
 ## 🎥 Demo
 
-![EdBot Demo](./assets/demo.gif)
+![EdBot Demo](./demo.gif)
 
 <!-- Replace with your actual demo GIF or screen recording -->
 
