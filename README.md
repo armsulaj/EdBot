@@ -1,25 +1,64 @@
-This is the [assistant-ui](https://github.com/Yonom/assistant-ui) starter project.
+# 🚀 EdBot — AI-Powered Learning Assistant
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-Framework-black?logo=next.js)
+![React](https://img.shields.io/badge/React-Library-61DAFB?logo=react\&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-Language-3178C6?logo=typescript\&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-AI%20API-412991?logo=openai\&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deployment-black?logo=vercel)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Stars](https://img.shields.io/github/stars/your-username/edbot?style=social)
 
-First, add your OpenAI API key to `.env.local` file:
+---
 
-```
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
+## ⚡ Learn Smarter. Think Better.
 
-Then, run the development server:
+Most tools give you answers.
+**EdBot helps you understand.**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+An AI-powered learning assistant that delivers **clear, structured, and personalized explanations** in real time — so you stop memorizing and start actually learning.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌐 Try It Live
+
+👉 **https://edbotai.vercel.app**
+
+---
+
+## 🎥 Demo
+
+![EdBot Demo](./assets/demo.gif)
+
+<!-- Replace with your actual demo GIF or screen recording -->
+
+---
+
+## ✨ Features
+
+* 🧠 **AI-Powered Responses** — Context-aware answers using advanced AI
+* 📚 **Step-by-Step Explanations** — Structured breakdown of complex topics
+* 🎯 **Personalized Learning** — Adapts to user level and pace
+* 💬 **Conversational Interface** — Natural, flexible interaction
+* 🔍 **Multi-Purpose** — Homework help, concept learning, research
+* ⚡ **Real-Time Performance** — Fast, responsive experience
+* 🎨 **Clean UI/UX** — Minimal and intuitive design
+* 🔐 **Secure Data Handling**
+* 🌐 **Scalable Architecture** — Ready for progress tracking, quizzes, analytics
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** React, Next.js
+* **Languages:** TypeScript, JavaScript
+* **AI:** OpenAI API
+* **Styling:** CSS
+* **Deployment:** Vercel
+* **Design:** Figma
+
+---
+
+## 🧩 Why It Stands Out
+
+EdBot doesn’t just answer questions — it structures knowledge.
+Every response is designed to improve understanding, build intuition, and support long-term learning.
